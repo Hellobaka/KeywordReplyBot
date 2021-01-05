@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Native.Sdk.Cqp.EventArgs;
 using Native.Sdk.Cqp.Interface;
 using PublicInfos;
+using SaveInfos;
 
 namespace me.cqp.luohuaming.qa.Code
 {
@@ -33,7 +34,24 @@ namespace me.cqp.luohuaming.qa.Code
 
         private static FunctionResult GroupMessage(CQGroupMessageEventArgs e)
         {
-            throw new NotImplementedException();
+            FunctionResult result = new FunctionResult()
+            {
+                SendFlag = false
+            };
+            try
+            {
+                foreach (var item in MainSave.Instances.Where(item => item.Judge(e.Message.Text)))
+                {
+                    return item.Progress(e);
+                }
+
+                return result;
+            }
+            catch (Exception exc)
+            {
+                e.CQLog.Info(exc.Message + exc.StackTrace);
+                return result;
+            }
         }
     }
 }
