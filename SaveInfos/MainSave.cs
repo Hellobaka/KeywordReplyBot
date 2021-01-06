@@ -12,5 +12,21 @@ namespace SaveInfos
         /// 保存各种事件的数组
         /// </summary>
         public static List<IOrderModel> Instances { get; set; } = new List<IOrderModel>();
+        static List<OrderModel> orderModels;
+        public static List<OrderModel> OrderModels
+        {
+            get
+            {
+                if (orderModels == null || orderModels.Count == 0)
+                {
+                    orderModels = SQLHelper.GetAllOrder();
+                }
+                return orderModels;
+            }
+            set { orderModels = value; }
+        }
+        public static List<OrderModel> DirectMatch { get; set; }
+        public static List<OrderModel> LikeMatch { get; set; }
+        public static List<OrderModel> RegexMatch { get; set; }
     }
 }

@@ -23,7 +23,7 @@ namespace Native.Core
 		{
             unityContainer.RegisterType<IGroupMessage, Event_GroupMessage>("群消息处理");
             unityContainer.RegisterType<ICQStartup, Event_StartUp>("酷Q启动事件");
-            unityContainer.RegisterType<IMenuCall, Event_MenuCall>("酷Q启动事件");
+            unityContainer.RegisterType<IMenuCall, Event_MenuCall>("设置界面");
         }
 	}
 }

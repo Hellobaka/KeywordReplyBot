@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SqlSugar;
 
-namespace me.cqp.luohuaming.qa.Code
+namespace SaveInfos
 {
     public static class SQLHelper
     {
@@ -41,6 +41,44 @@ namespace me.cqp.luohuaming.qa.Code
                 {
                     return null;
                 }
+            }
+        }
+        public static int AddItem(OrderModel model)
+        {
+            using (var db = GetInstance())
+            {
+                var result = db.UseTran(() =>
+                {
+                    return db.Insertable(model).ExecuteReturnIdentity();
+                });
+                if (result.IsSuccess)
+                {
+                    return result.Data;
+                }
+                else
+                {
+                    return -1;
+                }
+            }
+        }
+        public static void UpdateItem(OrderModel model)
+        {
+            using (var db = GetInstance())
+            {
+                var result = db.UseTran(() =>
+                {
+                    return db.Updateable(model).ExecuteCommand();
+                });
+            }
+        }
+        public static void RemoveItem(OrderModel model)
+        {
+            using (var db = GetInstance())
+            {
+                var result = db.UseTran(() =>
+                {
+                    return db.Deleteable(model).ExecuteCommand();
+                });
             }
         }
     }

@@ -15,6 +15,7 @@ namespace me.cqp.luohuaming.qa.Code
             MainSave.CQLog = e.CQLog;
             MainSave.AppDirectory = e.CQApi.AppDirectory;
             SQLHelper.Init(Path.Combine(MainSave.AppDirectory, "qav2.db"));
+            Helper.OrderListInit();
         }
     }
 }
