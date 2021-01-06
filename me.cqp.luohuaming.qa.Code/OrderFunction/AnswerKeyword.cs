@@ -29,17 +29,17 @@ namespace me.cqp.luohuaming.qa.Code.OrderFunction
             FunctionResult result = new FunctionResult();
             SendText sendText = new SendText();
             sendText.SendID = e.FromGroup;
-            if (MainSave.DirectMatch.Any(x => x.keyword == e.Message.Text))
+            if (MainSave.DirectMatch.Any(x => x.keyword == e.Message.Text && x.state == 0))
             {
                 result.SendFlag = true;
                 sendText.MsgToSend.Add(GetDirectMatchResult(e.Message.Text));
             }
-            else if (MainSave.LikeMatch.Any(x => e.Message.Text.Contains(x.keyword)))
+            else if (MainSave.LikeMatch.Any(x => e.Message.Text.Contains(x.keyword) && x.state == 0))
             {
                 result.SendFlag = true;
                 sendText.MsgToSend.Add(GetLikeMatchResult(e.Message.Text));
             }
-            else if (MainSave.RegexMatch.Any(x => Regex.IsMatch(e.Message.Text, x.keyword)))
+            else if (MainSave.RegexMatch.Any(x => Regex.IsMatch(e.Message.Text, x.keyword) && x.state == 0))
             {
                 result.SendFlag = true;
                 sendText.MsgToSend.Add(GetRegexMatchResult(e.Message.Text));
