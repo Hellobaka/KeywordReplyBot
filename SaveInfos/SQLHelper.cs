@@ -71,6 +71,14 @@ namespace SaveInfos
                 });
             }
         }
+        public static void CreateDB()
+        {
+            using (var db = GetInstance())
+            {
+                db.DbMaintenance.CreateDatabase(DBPath);
+                db.CodeFirst.InitTables(typeof(OrderModel));
+            }
+        }
         public static void RemoveItem(OrderModel model)
         {
             using (var db = GetInstance())

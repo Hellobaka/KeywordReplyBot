@@ -17,7 +17,7 @@ namespace SaveInfos
         {
             get
             {
-                if (orderModels == null || orderModels.Count == 0)
+                if (orderModels == null)
                 {
                     orderModels = SQLHelper.GetAllOrder();
                 }
